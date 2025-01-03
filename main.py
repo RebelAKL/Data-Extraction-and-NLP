@@ -1,34 +1,39 @@
 import os
-import requests
-from bs4 import BeautifulSoup
 import pandas as pd
-import spacy
-import re
-
-
 from article_extraction import extract_articles
-from text_analysis import analyze_text
-import pandas as pd
+from text_analysis import TextAnalyzer
+from stopwords_loader import load_stopwords, load_word_list
+
+def main():
+    input_file = "input/Input.xlsx"
+    articles_folder = "articles"
+    output_file = "output/Output.xlsx"
+    
+
+    stopwords = load_stopwords("StopWords")
+    positive_words = load_word_list("MasterDictionary//positive-words.txt")
+    negative_words = load_word_list("MasterDictionary//negative-words.txt")
+    
+
+    print("Extracting articles...")
+    extract_articles(input_file, articles_folder)
+    
+
+    print("Performing text analysis...")
+    analyzer = TextAnalyzer(stopwords, positive_words, negative_words)
+    results = []
+
+    for file_name in os.listdir(articles_folder):
+        file_path = os.path.join(articles_folder, file_name)
+        url_id = file_name.replace(".txt", "")
+        analysis = analyzer.analyze(file_path)
+        analysis["URL_ID"] = url_id
+        results.append(analysis)
+
+
+    output_df = pd.DataFrame(results)
+    output_df.to_excel(output_file, index=False)
+    print(f"Analysis results saved to {output_file}")
 
 if __name__ == "__main__":
-  input_file = "Input.xlsx"
-  output_file = "Output Data Structure.xlsx"
-
-  print("Extracting articles...")
-  extract_articles(input_file)
-
-  print("Performing text analysis...")
-  results = []
-  for file in os.listdir("articles"):
-    if file.endswith(".txt"):
-      url_id = file.split(".")[0]
-      with open(f"articles/{file}", "r", encoding="utf-8") as f:
-        text = f.read()
-      analysis = analyze_text(text)
-      analysis["URL_ID"] = url_id
-      results.append(analysis)
-
-  output_df = pd.DataFrame(results)
-  output_df.to_excel(output_file, index=False)
-
-  print(f"Text analysis completed. Results saved in {output_file}.")
+    main()

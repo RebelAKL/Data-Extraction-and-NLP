@@ -4,4 +4,4 @@ spacy
 pandas
 numpy
 selenium
-textblob
+textstat
