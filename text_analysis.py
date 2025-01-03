@@ -1,4 +1,5 @@
 import spacy
+import re
 from load_words import positive_words, negative_words
 
 def analyze_text(text):
