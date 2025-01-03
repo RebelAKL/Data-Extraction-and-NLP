@@ -13,7 +13,7 @@ class TextAnalyzer:
 
     def clean_text(self, text):
 
-        text = re.sub(r'[^\w\s]', '', text)  # Remove punctuations
+        text = re.sub(r'[^\w\s]', '', text) 
         words = text.split()
         return [word.lower() for word in words if word.lower() not in self.stopwords]
 
