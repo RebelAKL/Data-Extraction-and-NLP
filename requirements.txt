@@ -3,5 +3,4 @@ openpyxl
 spacy
 pandas
 numpy
-selenium
-textstat
+requests
