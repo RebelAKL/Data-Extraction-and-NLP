@@ -10,9 +10,9 @@ def main():
     output_file = "output/Output.xlsx"
     
 
-    stopwords = load_stopwords("dictionaries/StopWords")
-    positive_words = load_word_list("dictionaries/positive-words.txt")
-    negative_words = load_word_list("dictionaries/negative-words.txt")
+    stopwords = load_stopwords("StopWords")
+    positive_words = load_word_list("MasterDictionary//positive-words.txt")
+    negative_words = load_word_list("MasterDictionary//negative-words.txt")
 
     print("Extracting articles...")
     extract_articles(input_file, articles_folder)
