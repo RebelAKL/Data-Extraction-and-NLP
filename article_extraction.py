@@ -10,6 +10,11 @@ def extract_articles(input_file):
   for index, row in df.iterrows():
     url_id = row["URL_ID"]
     url = row["URL"]
+
+    if os.path.exists(f"articles/{url_id}.txt"):
+      print(f"Article {url_id} already extracted.")
+      continue
+    
     try:
       response = requests.get(url)
       soup = BeautifulSoup(response.content, 'html.parser')

@@ -1,5 +1,5 @@
 import spacy
-from positive_words import positive_words, negative_words
+from load_words import positive_words, negative_words
 
 def analyze_text(text):
   nlp = spacy.load("en_core_web_sm")
