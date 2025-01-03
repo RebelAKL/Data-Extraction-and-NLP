@@ -23,5 +23,6 @@ def extract_articles(input_file):
       
       with open(f"articles/{url_id}.txt", "w", encoding="utf-8") as file:
         file.write(title + "\n" + article_body)
+        print(f"Article {url_id} extracted successfully.")
     except Exception as e:
       print(f"Failed to extract URL_ID {url_id}: {e}")
