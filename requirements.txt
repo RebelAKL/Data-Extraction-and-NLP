@@ -1,0 +1,7 @@
+beautifulsoup4
+openpyxl
+spacy
+pandas
+numpy
+selenium
+textblob
