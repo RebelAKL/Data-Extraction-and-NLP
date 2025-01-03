@@ -19,7 +19,7 @@ class TextAnalyzer:
 
     def analyze(self, file_path):
 
-        with open(file_path, "r", encoding="utf-8") as file:
+        with open(file_path, "r", encoding="ISO-8859-1") as file:
             raw_text = file.read()
 
         cleaned_words = self.clean_text(raw_text)
